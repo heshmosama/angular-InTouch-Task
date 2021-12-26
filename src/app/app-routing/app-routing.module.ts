@@ -4,7 +4,7 @@ import { CartComponent } from '../cart/cart.component';
 import { ProductsComponent } from '../products/products.component';
 
 const routes: Routes = [
-  {path: '**', redirectTo: '/prodcuts', pathMatch: 'full' },
+  {path: '', redirectTo: '/prodcuts', pathMatch: 'full' },
   {path:'cart',component:CartComponent,children:[
     {path:'prodcuts',component:ProductsComponent}
   ]},
@@ -16,4 +16,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [CartComponent]
+export const routingComponents = [ProductsComponent,CartComponent]
