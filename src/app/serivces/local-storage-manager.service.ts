@@ -9,16 +9,24 @@ export class LocalStorageManagerService {
 
   constructor() { }
 
-  store(content: Products[]) {
-    localStorage.setItem(this.productList, JSON.stringify(content));
+  async store(content: Products) {
+    const products:Products[] = await this.retrieve() as Products[]
+    products.push(content)
+    localStorage.setItem(this.productList, JSON.stringify(products));
   }
 
-  remove(){
-    localStorage.removeItem(this.productList)
+  async remove(content:number){
+    const products:Products[] =await this.retrieve() as Products[]
+    const productIndex = products.findIndex(i => i.id === content)
+    if(productIndex > -1){
+      products.splice(productIndex,1)
+      localStorage.setItem(this.productList, JSON.stringify(products));
+    }
+  
   }
-  retrieve() {
+  async retrieve() {
     var retrievedObject: any = localStorage.getItem(this.productList);
-    if (!retrievedObject) throw 'productList';
+    if (!retrievedObject) [];
     return retrievedObject;
   }
 

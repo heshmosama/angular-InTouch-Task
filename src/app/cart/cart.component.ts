@@ -10,10 +10,23 @@ import { LocalStorageManagerService } from '../serivces/local-storage-manager.se
 export class CartComponent implements OnInit {
   collections: Products[] = [];
   isLoading = false;
-  error = null
-  constructor(private localeservice :LocalStorageManagerService) { }
+
+  constructor(private localeservice: LocalStorageManagerService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    this.localeservice.retrieve().then((value) => {
+      this.isLoading = false;
+      if (value) {
+        this.collections = value as Products[];
+      }
+    })
   }
 
+  onRemoveClicked(id: number) {
+    this.isLoading = true;
+    this.localeservice.remove(id).then(() => {
+      this.isLoading = false
+    })
+  }
 }

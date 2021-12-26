@@ -1,18 +1,14 @@
 <div class="card" style="width: 18rem;">
-    <p *ngIf="collections.length < 1 && !isLoading && error == null">No Products</p>
+    <p *ngIf="collections.length < 1 && !isLoading">No Products</p>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let item of collections">
             <div class="card-body">
                 <h5 class="card-title">{{item.name}}</h5>
                 <p class="card-text">{{item.description}}</p>
+                <button type="button" (click)="onRemoveClicked(item.id)" class="btn btn-primary">Remove From Cart</button>
+
              </div>
         </li>
     </ul>
 
-    <!-- <p *ngIf="isLoading">Loading...</p>
-    <div class="alert alert-dengar" *ngIf="error">
-        <h1>An Error Occured!</h1>
-        <p>{{error}}</p>
-    </div> -->
- 
 </div>
